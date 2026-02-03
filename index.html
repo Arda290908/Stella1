@@ -1,64 +1,85 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Valentinstag 💘</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            text-align: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<title>Valentinstag 💘</title>
 
-        h1 {
-            margin-top: 60px;
-            color: #fff;
-            font-size: 2.5em;
-        }
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    color: white;
+}
 
-        .buttons {
-            margin-top: 50px;
-        }
+h1 {
+    margin-top: 60px;
+    font-size: 2.6em;
+}
 
-        button {
-            font-size: 1.5em;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-        }
+.buttons {
+    margin-top: 50px;
+}
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-        }
+button {
+    font-size: 1.6em;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
 
-        #noBtn {
-            background-color: #555;
-            color: white;
-            position: absolute;
-        }
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
+}
 
-        #result {
-            display: none;
-            margin-top: 40px;
-            color: white;
-        }
+#noBtn {
+    background: #444;
+    color: white;
+    position: absolute;
+}
 
-        #result h2 {
-            font-size: 2.6em;
-        }
+#result {
+    display: none;
+    margin-top: 30px;
+}
 
-        .images img {
-            width: 200px;
-            border-radius: 15px;
-            margin: 10px;
-        }
-    </style>
+#result h2 {
+    font-size: 2.8em;
+}
+
+/* 💖 Herzen */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 24px;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+/* 📸 Slideshow */
+.slideshow {
+    margin-top: 20px;
+}
+
+.slideshow img {
+    width: 230px;
+    border-radius: 18px;
+    display: none;
+}
+</style>
 </head>
+
 <body>
 
 <h1>Willst du mein Valentinstags-Date sein? 💖</h1>
@@ -70,38 +91,76 @@
 
 <div id="result">
     <h2>JAAAAAAA 💕<br>du willst mein Valentinstags-Date sein!</h2>
-    <p>Hier kannst du deine Bilder einfügen:</p>
 
-    <div class="images">
-        <!-- Beispiel -->
-        <!-- <img src="bild1.jpg"> -->
-        <!-- <img src="bild2.jpg"> -->
+    <div class="slideshow">
+        <!-- 🖼️ HIER DEINE BILDER -->
+        <img src="bild1.jpg">
+        <img src="bild2.jpg">
+        <img src="bild3.jpg">
     </div>
 </div>
 
+<!-- 🎵 MUSIK -->
+<audio id="music" loop>
+    <source src="careless_whisper.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const result = document.getElementById("result");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const result = document.getElementById("result");
+const music = document.getElementById("music");
 
-    function moveNoButton() {
-        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    }
+let speed = 1;
 
-    // PC
-    noBtn.addEventListener("mouseenter", moveNoButton);
+/* 😈 NO-BUTTON: extra frech */
+function moveNo() {
+    speed += 0.3;
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = `rotate(${Math.random()*20-10}deg)`;
+}
 
-    // Handy
-    noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
 
-    yesBtn.addEventListener("click", () => {
-        document.querySelector(".buttons").style.display = "none";
-        document.querySelector("h1").style.display = "none";
-        result.style.display = "block";
-    });
+/* 💖 JA-KLICK */
+yesBtn.addEventListener("click", () => {
+    document.querySelector(".buttons").style.display = "none";
+    document.querySelector("h1").style.display = "none";
+    result.style.display = "block";
+    music.play();
+    startHearts();
+    startSlideshow();
+});
+
+/* 💖 FLIEGENDE HERZEN */
+function startHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 300);
+}
+
+/* 📸 SLIDESHOW */
+let slideIndex = 0;
+function startSlideshow() {
+    const images = document.querySelectorAll(".slideshow img");
+    images[0].style.display = "block";
+
+    setInterval(() => {
+        images[slideIndex].style.display = "none";
+        slideIndex = (slideIndex + 1) % images.length;
+        images[slideIndex].style.display = "block";
+    }, 2500);
+}
 </script>
 
 </body>
