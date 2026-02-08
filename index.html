@@ -245,6 +245,7 @@
 
     let yesClicks = 0;
     let yesEnabled = false;
+    let requireNo = false;
     let noAttempts = 0;
     let noHasMoved = false;
 
@@ -255,6 +256,13 @@
       if (!noHasMoved) {
         noBtn.style.position = "fixed";
         noHasMoved = true;
+      }
+
+      if (requireNo) {
+        yesEnabled = true;
+        requireNo = false;
+        hint.innerText = "Jetzt wieder auf Ja drücken";
+        underHint.innerText = "";
       }
 
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -284,14 +292,18 @@
       yesBtn.classList.add("wobble");
 
       if (!yesEnabled) {
+        if (requireNo) {
+          return;
+        }
+
         yesClicks += 1;
 
         hint.innerText = "Drück nochmal";
 
-        if (yesClicks >= 5) {
-          hint.innerText = "";
+        if (yesClicks >= 4) {
+          hint.innerText = "Okay dann jetzt anders";
           underHint.innerText = "Drück mal auf Nein";
-          yesEnabled = true;
+          requireNo = true;
         }
         return;
       }
