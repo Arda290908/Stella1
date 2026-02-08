@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Valentinstag</title>
   <style>
     body {
@@ -282,9 +283,6 @@
         yesClicks += 1;
 
         hint.innerText = "Drück nochmal";
-
-        const scale = 1 + yesClicks * 0.15;
-        yesBtn.style.transform = `scale(${scale})`;
 
         if (yesClicks >= 5) {
           hint.innerText = "Okay dann jetzt anders";
