@@ -26,9 +26,8 @@
     button { font-size: 1.6em; padding: 15px 35px; border: none; border-radius: 15px; cursor: pointer; }
     #yesBtn { background: #ff4d6d; color: white; }
     #noBtn { background: #444; color: white; position: relative; }
-    #result { display: none; margin-top: 20px; width: 100%; }
-
-    #result h2 { font-size: 2em; margin-bottom: 12px; }
+    #result { display: none; margin-top: 10px; width: 100%; }
+    #result h2 { font-size: 2em; margin-bottom: 10px; }
 
     .wobble { animation: wobble 0.4s; }
     @keyframes wobble {
@@ -42,34 +41,28 @@
     .heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatUp linear forwards; }
     @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
 
-    /* 🔥 SLIDESHOW FIX FÜR HANDY */
+    /* Grid-Grundlayout, damit alles auf den Screen passt */
     .slideshow {
-      margin-top: 10px;
+      margin-top: 8px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
       gap: 8px;
       width: 100%;
       max-width: 95vw;
-      height: 55vh; /* passt auf Handy-Bildschirm */
+      height: 55vh; /* passt auf Handy */
+      position: relative;
     }
 
+    /* Sticker-Look */
     .slideshow img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 3px solid white;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-      transform: rotate(0deg);
-    }
-
-    @media (min-width: 768px) {
-      .slideshow {
-        height: 45vh;
-        max-width: 700px;
-        margin: 20px auto 0 auto;
-      }
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+      transition: transform 0.4s ease;
     }
 
     #noOverlay {
@@ -147,7 +140,6 @@
 
       if (noAttempts === 8) {
         noOverlay.style.display = "block";
-
         setTimeout(() => {
           noOverlay.style.display = "none";
           hint.innerText = "Jetzt wieder auf Ja drücken";
@@ -169,14 +161,9 @@
         if (requireNo) return;
 
         yesClicks += 1;
-
-        if (yesClicks < 4) {
-          hint.innerText = "Drück nochmal";
-        }
-
+        if (yesClicks < 4) hint.innerText = "Drück nochmal";
         if (yesClicks >= 4) {
           hint.innerText = "Drück jetzt auf Nein";
-          underHint.innerText = "";
           requireNo = true;
         }
         return;
@@ -190,6 +177,7 @@
 
       music.play();
       startHearts();
+      randomizeStickers(); // 🔥 Sticker zufällig platzieren
     });
 
     function startHearts() {
@@ -202,6 +190,16 @@
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 6000);
       }, 300);
+    }
+
+    function randomizeStickers() {
+      const stickers = document.querySelectorAll(".slideshow img");
+      stickers.forEach((sticker) => {
+        const offsetX = Math.random() * 16 - 8;   // leichte Verschiebung
+        const offsetY = Math.random() * 16 - 8;
+        const rotation = Math.random() * 10 - 5;  // kleine Drehung
+        sticker.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+      });
     }
   </script>
 </body>
