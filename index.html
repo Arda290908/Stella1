@@ -192,7 +192,11 @@
       }
 
       .slideshow img {
-        width: 140px;
+        width: 110px;
+      }
+
+      .slideshow {
+        gap: 10px;
       }
     }
   </style>
@@ -285,7 +289,7 @@
         hint.innerText = "Drück nochmal";
 
         if (yesClicks >= 5) {
-          hint.innerText = "Okay dann jetzt anders";
+          hint.innerText = "";
           underHint.innerText = "Drück mal auf Nein";
           yesEnabled = true;
         }
