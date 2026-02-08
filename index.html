@@ -26,8 +26,9 @@
     button { font-size: 1.6em; padding: 15px 35px; border: none; border-radius: 15px; cursor: pointer; }
     #yesBtn { background: #ff4d6d; color: white; }
     #noBtn { background: #444; color: white; position: relative; }
-    #result { display: none; margin-top: 30px; }
-    #result h2 { font-size: 2.8em; }
+    #result { display: none; margin-top: 20px; width: 100%; }
+
+    #result h2 { font-size: 2em; margin-bottom: 12px; }
 
     .wobble { animation: wobble 0.4s; }
     @keyframes wobble {
@@ -41,9 +42,35 @@
     .heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatUp linear forwards; }
     @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
 
-    .slideshow { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; }
-    .slideshow img { width: 180px; border-radius: 18px; border: 4px solid white; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); transform: rotate(-2deg); transition: transform 0.3s ease; position: relative; }
-    .slideshow img:nth-child(even) { transform: rotate(2deg); }
+    /* 🔥 SLIDESHOW FIX FÜR HANDY */
+    .slideshow {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+      width: 100%;
+      max-width: 95vw;
+      height: 55vh; /* passt auf Handy-Bildschirm */
+    }
+
+    .slideshow img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid white;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+      transform: rotate(0deg);
+    }
+
+    @media (min-width: 768px) {
+      .slideshow {
+        height: 45vh;
+        max-width: 700px;
+        margin: 20px auto 0 auto;
+      }
+    }
 
     #noOverlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -163,7 +190,6 @@
 
       music.play();
       startHearts();
-      randomizeStickers();
     });
 
     function startHearts() {
@@ -176,16 +202,6 @@
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 6000);
       }, 300);
-    }
-
-    function randomizeStickers() {
-      const stickers = document.querySelectorAll(".slideshow img");
-      stickers.forEach((sticker) => {
-        const offsetX = Math.random() * 16 - 8;
-        const offsetY = Math.random() * 16 - 8;
-        const rotation = Math.random() * 6 - 3;
-        sticker.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
-      });
     }
   </script>
 </body>
