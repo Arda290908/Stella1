@@ -19,186 +19,38 @@
       padding: 0 16px;
       box-sizing: border-box;
     }
+    h1 { margin-top: 60px; font-size: 2.6em; }
+    #hint { margin-top: 20px; font-size: 1.4em; }
+    #underHint { margin-top: 10px; font-size: 1.2em; }
+    .buttons { margin-top: 40px; display: flex; justify-content: center; gap: 24px; position: relative; min-width: 280px; flex-wrap: wrap; }
+    button { font-size: 1.6em; padding: 15px 35px; border: none; border-radius: 15px; cursor: pointer; }
+    #yesBtn { background: #ff4d6d; color: white; }
+    #noBtn { background: #444; color: white; position: relative; }
+    #result { display: none; margin-top: 30px; }
+    #result h2 { font-size: 2.8em; }
 
-    h1 {
-      margin-top: 60px;
-      font-size: 2.6em;
-    }
-
-    #hint {
-      margin-top: 20px;
-      font-size: 1.4em;
-    }
-
-    #underHint {
-      margin-top: 10px;
-      font-size: 1.2em;
-    }
-
-    .buttons {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      position: relative;
-      min-width: 280px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      font-size: 1.6em;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-
-    #yesBtn {
-      background: #ff4d6d;
-      color: white;
-    }
-
-    #noBtn {
-      background: #444;
-      color: white;
-      position: relative;
-    }
-
-    #result {
-      display: none;
-      margin-top: 30px;
-    }
-
-    #result h2 {
-      font-size: 2.8em;
-    }
-
-    /* Wackel Effekt */
-    .wobble {
-      animation: wobble 0.4s;
-    }
-
+    .wobble { animation: wobble 0.4s; }
     @keyframes wobble {
-      0% {
-        transform: translateX(0) rotate(0deg);
-      }
-      25% {
-        transform: translateX(-6px) rotate(-3deg);
-      }
-      50% {
-        transform: translateX(6px) rotate(3deg);
-      }
-      75% {
-        transform: translateX(-4px) rotate(-2deg);
-      }
-      100% {
-        transform: translateX(0) rotate(0deg);
-      }
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-6px) rotate(-3deg); }
+      50% { transform: translateX(6px) rotate(3deg); }
+      75% { transform: translateX(-4px) rotate(-2deg); }
+      100% { transform: translateX(0) rotate(0deg); }
     }
 
-    /* Herzen */
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 20px;
-      animation: floatUp linear forwards;
-    }
+    .heart { position: fixed; bottom: -20px; font-size: 20px; animation: floatUp linear forwards; }
+    @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
 
-    @keyframes floatUp {
-      to {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
-    }
+    .slideshow { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; }
+    .slideshow img { width: 180px; border-radius: 18px; border: 4px solid white; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); transform: rotate(-2deg); transition: transform 0.3s ease; position: relative; }
+    .slideshow img:nth-child(even) { transform: rotate(2deg); }
 
-    /* Bilder als Sticker */
-    .slideshow {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .slideshow img {
-      width: 180px;
-      border-radius: 18px;
-      border: 4px solid white;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      transform: rotate(-2deg);
-      transition: transform 0.3s ease;
-      position: relative;
-    }
-
-    .slideshow img:nth-child(even) {
-      transform: rotate(2deg);
-    }
-
-    /* Overlay */
     #noOverlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      color: white;
-      z-index: 9999;
-      text-align: center;
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9); color: white; z-index: 9999; text-align: center;
     }
-
-    #noOverlay h1 {
-      margin-top: 60px;
-      font-size: 2.8em;
-    }
-
-    #noOverlay img {
-      margin-top: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 0;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        margin-top: 32px;
-        font-size: 2em;
-      }
-
-      #hint {
-        font-size: 1.1em;
-      }
-
-      #underHint {
-        font-size: 1em;
-      }
-
-      button {
-        font-size: 1.2em;
-        padding: 12px 24px;
-      }
-
-      .buttons {
-        margin-top: 24px;
-        gap: 16px;
-        min-width: auto;
-      }
-
-      #result h2 {
-        font-size: 2em;
-      }
-
-      .slideshow img {
-        width: 110px;
-      }
-
-      .slideshow {
-        gap: 10px;
-      }
-    }
+    #noOverlay h1 { margin-top: 60px; font-size: 2.8em; }
+    #noOverlay img { margin-top: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
   </style>
 </head>
 
@@ -214,20 +66,19 @@
 
   <div id="result">
     <h2>JAAAAAAA du willst mein Valentinstags Date sein</h2>
-
     <div class="slideshow">
-      <img src="bild1.jpg" alt="Sticker 1">
-      <img src="bild2.jpg" alt="Sticker 2">
-      <img src="bild3.jpg" alt="Sticker 3">
-      <img src="bild4.jpg" alt="Sticker 4">
-      <img src="bild5.jpg" alt="Sticker 5">
-      <img src="bild6.jpg" alt="Sticker 6">
+      <img src="bild1.jpg">
+      <img src="bild2.jpg">
+      <img src="bild3.jpg">
+      <img src="bild4.jpg">
+      <img src="bild5.jpg">
+      <img src="bild6.jpg">
     </div>
   </div>
 
   <div id="noOverlay">
     <h1>WOW nicht dein Ernst</h1>
-    <img src="wackelbild.jpg" alt="Überraschter Ausdruck">
+    <img src="wackelbild.jpg">
   </div>
 
   <audio id="music" loop>
@@ -249,7 +100,6 @@
     let noAttempts = 0;
     let noHasMoved = false;
 
-    /* Nein Button */
     function moveNo() {
       noAttempts += 1;
 
@@ -261,8 +111,6 @@
       if (requireNo) {
         yesEnabled = true;
         requireNo = false;
-        hint.innerText = "Jetzt wieder auf Ja drücken";
-        underHint.innerText = "";
       }
 
       const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
@@ -285,24 +133,23 @@
     noBtn.addEventListener("mouseenter", moveNo);
     noBtn.addEventListener("touchstart", moveNo);
 
-    /* Ja Button */
     yesBtn.addEventListener("click", () => {
       yesBtn.classList.remove("wobble");
       void yesBtn.offsetWidth;
       yesBtn.classList.add("wobble");
 
       if (!yesEnabled) {
-        if (requireNo) {
-          return;
-        }
+        if (requireNo) return;
 
         yesClicks += 1;
 
-        hint.innerText = "Drück nochmal";
+        if (yesClicks < 4) {
+          hint.innerText = "Drück nochmal";
+        }
 
         if (yesClicks >= 4) {
-          hint.innerText = "";
-          underHint.innerText = "Drück mal auf Nein";
+          hint.innerText = "Drück jetzt auf Nein";
+          underHint.innerText = "";
           requireNo = true;
         }
         return;
@@ -319,7 +166,6 @@
       randomizeStickers();
     });
 
-    /* Herzen */
     function startHearts() {
       setInterval(() => {
         const heart = document.createElement("div");
@@ -332,7 +178,6 @@
       }, 300);
     }
 
-    /* Sticker Zufall */
     function randomizeStickers() {
       const stickers = document.querySelectorAll(".slideshow img");
       stickers.forEach((sticker) => {
@@ -342,7 +187,6 @@
         sticker.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
       });
     }
-
   </script>
 </body>
 </html>
